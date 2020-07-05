@@ -1,0 +1,97 @@
+type Query{
+    users(query: String): [User!]!
+    me: User!
+    posts(query: String): [Post!]!
+    comments: [Comment!]!
+    post(id: ID!): Post!
+}
+
+type Mutation{
+    createUser(data:createUserInput): AuthPayload!
+    login(data:loginInput!): AuthPayload!
+    deleteUser(id: ID!): User!
+    updateUser(data:updateUserInput): User!
+    createPost(data:createPostInput): Post!
+    deletePost(id:ID!): Post!
+    updatePost(id:ID!,data:updatePostInput): Post!
+    createComment(text: String!, post: ID!): Comment!
+    deleteComment(id:ID!): Comment!
+    updateComment(id:ID!,data:updateCommentInput): Comment!
+}
+
+type Subscription{
+    count: Int!
+    comment(postId:ID): commentSubscriptionPayload!
+    post:postSubscriptionPayload!
+}
+
+input createUserInput{
+    name:String!
+    email:String!
+    password: String!
+}
+
+input updateUserInput{
+    name:String
+    email:String
+    password: String
+}
+
+input createPostInput{
+    title: String!
+    body: String!
+    published: Boolean!
+}
+
+input updatePostInput{
+    title: String,
+    body: String,
+    published: Boolean
+}
+
+input updateCommentInput{
+    text: String
+}
+
+input loginInput{
+    email:String!,
+    password:String!
+}
+
+type User{
+    id: ID!
+    name: String!
+    email: String
+    password: String!
+    posts: [Post!]!
+    comments: [Comment!]!
+}
+
+type Post{
+    id: ID!
+    title: String!
+    body: String!
+    published: Boolean!
+    author: User!
+    comments: [Comment!]!
+}
+
+type Comment{
+    id:ID!
+    text: String!
+    author: User!
+    post: Post!
+}
+type postSubscriptionPayload{
+    mutation: String!,
+    node: Post
+}
+type commentSubscriptionPayload{
+    mutation: String!,
+    node: Comment
+}
+
+type AuthPayload{
+    user: User!
+    token: String!
+}

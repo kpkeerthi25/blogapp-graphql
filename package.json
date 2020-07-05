@@ -1,0 +1,28 @@
+{
+  "name": "graphql-basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "heroku-postbuild": "babel src --out-dir dist --copy-files",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js -e js,graphql --exec babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "get-schema": "get-graphql-schema -h 'Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJwcmlzbWFAZGVmYXVsdCIsInJvbGVzIjpbImFkbWluIl19LCJpYXQiOjE1OTM4NzI4NjEsImV4cCI6MTU5NDQ3NzY2MX0.hnZo9Uyc2Zj2O_b3JLwCyyuk9Lotsjmak0csBTwOAdc' http://localhost:4466/prisma > src/generated/prisma.graphql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.10.4",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bcrypt": "^5.0.0",
+    "env-cmd": "^10.1.0",
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.4",
+    "prisma-binding": "^2.3.16"
+  }
+}
