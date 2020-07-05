@@ -16,7 +16,7 @@ const Mutation={
         }
         optArgs.data.password=password
         const user = await prisma.mutation.createUser(optArgs)
-        const token = jwt.sign({userId:user.id},'JWT_SECRET')
+        const token = jwt.sign({userId:user.id},process.env.JWT_SECRET)
         
 
         return {
@@ -38,7 +38,7 @@ const Mutation={
         if(!isMatch){
             throw new Error("unable to login")
         }   
-        const token = jwt.sign({userId:user.id},'JWT_SECRET')
+        const token = jwt.sign({userId:user.id},process.env.JWT_SECRET)
 
         return {
             user,
